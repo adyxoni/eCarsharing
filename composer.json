@@ -1,0 +1,8 @@
+{
+    "name": "ibu/ecarsharing",
+    "description": "eCarsharing application",
+    "license": "apache2",
+    "require": {
+        "mikecao/flight": "^2.0"
+    }
+}
