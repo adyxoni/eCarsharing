@@ -6,7 +6,8 @@ error_reporting(E_ALL);
 require_once "api/dao/ECarsharingDao.class.php";
 
 $dao= new ECarsharingDao();
+$id=$_REQUEST['id'];
 
-$results = $dao->get_all();
-print_r($results);
+$results = $dao->delete($id);
+echo "DELETED";
 ?>
