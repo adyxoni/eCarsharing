@@ -28,15 +28,16 @@ class ECarsharingDao{
 */
 
   public function add($car_brand, $car_model, $license_plate, $price_per_hour){
-  $stmt = $this->conn->prepare("INSERT INTO vehicles (car_brand, car_model, license_plate, price_per_hour) VALUES ('$car_brand', '$car_model', '$license_plate', '$price_per_hour')");
-  $stmt->execute();
+  $stmt = $this->conn->prepare("INSERT INTO vehicles (car_brand, car_model, license_plate, price_per_hour) VALUES (:car_brand, :car_model, :license_plate, :price_per_hour)");
+  $stmt->execute(['car_brand'=>$car_brand, 'car_model'=>$car_model, 'license_plate'=>$license_plate, 'price_per_hour'=>$price_per_hour]);
   }
 
 /**
 * Delete vehicle from the database
 */
   public function delete($id){
-  $stmt = $this->conn->prepare("DELETE FROM vehicles WHERE id=$id");
+  $stmt = $this->conn->prepare("DELETE FROM vehicles WHERE id=:id");
+  $stmt->bindParam(':id', $id);
   $stmt->execute();
   }
 
@@ -44,7 +45,7 @@ class ECarsharingDao{
 * Update vehicles
 */
   public function update($id, $car_brand, $car_model, $license_plate, $price_per_hour){
-  $stmt = $this->conn->prepare("UPDATE vehicles SET car_brand='$car_brand', car_model='$car_model', license_plate='$license_plate', price_per_hour='$price_per_hour' WHERE id=$id");
-  $stmt->execute();
+  $stmt = $this->conn->prepare("UPDATE vehicles SET car_brand=:car_brand, car_model=:car_model, license_plate=:license_plate, price_per_hour=:price_per_hour WHERE id=:id");
+  $stmt->execute(['car_brand'=>$car_brand, 'car_model'=>$car_model, 'license_plate'=>$license_plate, 'price_per_hour'=>$price_per_hour,'id'=>$id]);
   }
 }
