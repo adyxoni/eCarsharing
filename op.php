@@ -7,7 +7,7 @@ require_once "api/dao/ECarsharingDao.class.php";
 
 $dao = new ECarsharingDao();
 
-$op=$_REQUEST['op'];
+$op = $_REQUEST['op'];
 
 switch ($op) {
 
@@ -41,11 +41,3 @@ switch ($op) {
   print_r($results);
   break;
 }
-
-
-
-
-
-
-
-?>

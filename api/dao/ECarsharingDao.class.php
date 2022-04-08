@@ -1,6 +1,6 @@
 <?php
 class ECarsharingDao{
-  protected $conn;
+  public $conn;
   public function __construct(){
   $servername = "localhost";
   $username = "carsharing";
@@ -23,6 +23,16 @@ class ECarsharingDao{
   $stmt->execute();
   return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
+
+/*
+* List individual records
+*/
+    public function get_by_id($id){
+        $stmt = $this->conn->prepare("SELECT * FROM vehicles WHERE id = :id");
+        $stmt->execute(['id' => $id]);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return reset($result);
+      }
 /**
 * Insert new vehicles into database
 */
