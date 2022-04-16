@@ -1,5 +1,5 @@
 <?php
-class ECarsharingDao{
+class VehiclesDao{
   public $conn;
   public function __construct(){
   $servername = "localhost";
@@ -37,9 +37,11 @@ class ECarsharingDao{
 * Insert new vehicles into database
 */
 
-  public function add($car_brand, $car_model, $license_plate, $price_per_hour){
+  public function add($vehicle){
   $stmt = $this->conn->prepare("INSERT INTO vehicles (car_brand, car_model, license_plate, price_per_hour) VALUES (:car_brand, :car_model, :license_plate, :price_per_hour)");
-  $stmt->execute(['car_brand'=>$car_brand, 'car_model'=>$car_model, 'license_plate'=>$license_plate, 'price_per_hour'=>$price_per_hour]);
+  $stmt->execute($vehicle);
+  $vehicle['id'] = $this->conn->lastInsertId();
+  return $vehicle;
   }
 
 /**
@@ -54,8 +56,9 @@ class ECarsharingDao{
 /**
 * Update vehicles
 */
-  public function update($id, $car_brand, $car_model, $license_plate, $price_per_hour){
+  public function update($vehicle){
   $stmt = $this->conn->prepare("UPDATE vehicles SET car_brand=:car_brand, car_model=:car_model, license_plate=:license_plate, price_per_hour=:price_per_hour WHERE id=:id");
-  $stmt->execute(['car_brand'=>$car_brand, 'car_model'=>$car_model, 'license_plate'=>$license_plate, 'price_per_hour'=>$price_per_hour,'id'=>$id]);
+  $stmt->execute($vehicle);
+  return $vehicle;
   }
 }
