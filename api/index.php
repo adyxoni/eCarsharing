@@ -16,17 +16,15 @@ Flight::route('/cars', function(){
     echo 'hello world!';
   });
 Flight::route('GET /vehicles', function(){
-  $vehicles = Flight::vehiclesDao()->get_all();
-  Flight::json($vehicles);
+  Flight::json(Flight::vehiclesDao()->get_all());
 });
 
 Flight::route('GET/vehicles/@id', function($id){
-  $vehicle = Flight::vehiclesDao()->get_by_id($id);
-  Flight::json($vehicle);
+  Flight::json(Flight::vehiclesDao()->get_by_id($id));
 });
 
 Flight::route('POST /vehicles', function(){
-  Flight::json(Flight::vehicleDao()->add(Flight::request()->data->getData()));
+  Flight::json(Flight::vehiclesDao()->add(Flight::request()->data->getData()));
 });
 
 Flight::route('DELETE /vehicles/@id', function($id){
