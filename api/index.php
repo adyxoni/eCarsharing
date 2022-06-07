@@ -1,6 +1,5 @@
 <?php
 
-
 require_once 'dao/VehiclesDao.class.php';
 require_once '../vendor/autoload.php';
 
@@ -13,6 +12,7 @@ Flight::route('/', function(){
 Flight::route('/cars', function(){
     echo 'hello world!';
   });
+
 Flight::route('GET /vehicles', function(){
   Flight::json(Flight::vehiclesDao()->get_all());
 });
@@ -35,5 +35,6 @@ Flight::route('PUT /vehicles/@id', function($id){
   $data['id'] = $id;
   Flight::json(Flight::vehiclesDao()->update($data));
 });
+
 Flight::start();
 ?>

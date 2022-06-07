@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title>ecarsharing</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <main>
+
+    </main>
+</body>
+
+<script src="js/jquery-3.6.0.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script>
+    // ajax get requests from API
+    $.get( "api/vehicles", function( data ) {
+    console.log(data);
+    alert( "Load was performed." );
+    });
+</script>
+
+</html>
