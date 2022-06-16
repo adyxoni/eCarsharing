@@ -17,7 +17,7 @@ Flight::route('GET /vehicles', function(){
   Flight::json(Flight::vehiclesDao()->get_all());
 });
 
-Flight::route('GET/vehicles/@id', function($id){
+Flight::route('GET /vehicles/@id', function($id){
   Flight::json(Flight::vehiclesDao()->get_by_id($id));
 });
 
