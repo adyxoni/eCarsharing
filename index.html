@@ -8,18 +8,49 @@
 
 <body>
     <main>
-
+        <div>
+            <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Car Brand</th>
+                    <th scope="col">Car Model</th>
+                    <th scope="col">License Plate</th>
+                    <th scope="col">Price per Hour</th>
+                  </tr>
+                </thead>
+                <tbody id="vehicle-list">
+                  
+                </tbody>
+              </table>
+        </div>
     </main>
 </body>
 
 <script src="js/jquery-3.6.0.min.js"></script>
 <script src="js/bootstrap.bundle.min.js"></script>
 <script>
+
     // ajax get requests from API
     $.get( "api/vehicles", function( data ) {
-    console.log(data);
-    alert( "Load was performed." );
+
+        $("#vehicle-list").html("");
+
+        var html="";
+        for(let i = 0; i < data.length; i++){
+            html += `
+            <tr>
+                <th scope="row">${i+1}</th>
+                <td>`+ data[i].car_brand +`</td>
+                <td>`+ data[i].car_model +`</td>
+                <td>`+ data[i].license_plate +`</td>
+                <td>`+ data[i].price_per_hour +`</td>
+            </tr>`;
+        }
+        $("#vehicle-list").html(html);
+        console.log(data);
     });
+
 </script>
 
 </html>
