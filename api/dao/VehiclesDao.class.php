@@ -6,7 +6,7 @@ class VehiclesDao{
     // https://freedb.tech/dashboard/
     
   $servername = "sql.freedb.tech";
-  $username = "freedb_carsharing";
+  $username = "freedb_ecarsharing";
   $password = "eDdnDb7kTR&28Du";
   $name="freedb_carsharing";
 

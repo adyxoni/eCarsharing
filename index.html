@@ -22,7 +22,14 @@
                 <tbody id="vehicle-list">
                   
                 </tbody>
-              </table>
+              </table> 
+            <!-- Adding button-->
+            <div class="row">
+              <div>
+                <button class="btn btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#addCarsModal">Add Vehicle</button>
+              </div>
+            </div>
+
         </div>
     </main>
 </body>
@@ -96,6 +103,30 @@
     console.log(vehicle);
   }
 
+  function addVehicle(){
+    console.log("Save car");
+
+    var vehicle = {};
+    vehicle.car_brand = $('#add_carBrand').val();
+    vehicle.car_model = $('#add_carModel').val();
+    vehicle.license_plate = $('#add_licensePlate').val();
+    vehicle.price_per_hour = $('#add_pricePerHour').val();
+
+    $.ajax({
+      url: "api/vehicles",
+      type: 'POST',
+      data: JSON.stringify(vehicle),
+      contentType: "application/json",
+      dataType: "json",
+      success: function(result){
+        
+        getVehicles();
+        console.log(result);
+        
+      }
+    });
+  }
+
 </script>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -118,6 +149,29 @@
         </div>
       </div>
     </div>
+</div>
+
+
+<!--Modal for adding cars-->
+<div class="modal fade" id="addCarsModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Vehicles</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input id="add_carBrand" type="text" />
+        <input id="add_carModel" type="text" />
+        <input id="add_licensePlate" type="text" />
+        <input id="add_pricePerHour" type="text" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary vehicle-save" onClick="addVehicle()">Save changes</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 </html>
