@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <title>ecarsharing</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      .error{
+        color: red;
+      }
+    </style>
 </head>
 
 <body>
@@ -36,98 +41,9 @@
 
 <script src="js/jquery-3.6.0.min.js"></script>
 <script src="js/bootstrap.bundle.min.js"></script>
-<script>
+<script src="js/jquery.validate.min.js"></script>
 
-  // ajax get requests from API
-  getVehicles();
 
-  function showModal(id){
-    $('.vehicle-details').attr('disabled', true);
-    $.get('api/vehicles/'+id, function(data){
-      console.log(data);
-      $("#id").val(data.id);
-      $("#carBrand").val(data.car_brand);
-      $("#carModel").val(data.car_model);
-      $("#licensePlate").val(data.license_plate);
-      $("#pricePerHour").val(data.price_per_hour);
-      $("#exampleModal").modal("show");
-      $('.vehicle-details').attr('disabled', false);
-    })
-  }
-
-  function getVehicles(){
-      
-    $.get( "api/vehicles", function( data ) {
-
-      $("#vehicle-list").html("");
-
-      var html="";
-      for(let i = 0; i < data.length; i++){
-        html += `
-        <tr>
-          <th scope="row">${i+1}</th>
-          <td>`+ data[i].car_brand +`</td>
-          <td>`+ data[i].car_model +`</td>
-          <td>`+ data[i].license_plate +`</td>
-          <td>`+ data[i].price_per_hour +`</td>
-          <td><button type="button" class="btn btn-secondary vehicle-details" onClick="showModal(`+ data[i].id +`)">Show details</button></td> 
-        </tr>`;
-      }
-      $("#vehicle-list").html(html);
-      console.log(data);
-    });
-  }
-
-  function saveVehicle(){
-    $('.save-vehicle').attr('disabled', true);
-    var vehicle = {};
-
-    vehicle.id = $('#id').val()
-    vehicle.car_brand = $('#carBrand').val();
-    vehicle.car_model = $('#carModel').val();
-    vehicle.license_plate = $('#licensePlate').val();
-    vehicle.price_per_hour = $('#pricePerHour').val();
-
-    $.ajax({
-      url: 'api/vehicles/'+$('#id').val(),
-      type: 'PUT',
-      data: JSON.stringify(vehicle),
-      contentType: "application/json",
-      dataType: "json",
-      success: function(result){
-        $("#exampleModal").modal("hide");
-        getVehicles();
-      }
-    });
-
-    console.log(vehicle);
-  }
-
-  function addVehicle(){
-    console.log("Save car");
-
-    var vehicle = {};
-    vehicle.car_brand = $('#add_carBrand').val();
-    vehicle.car_model = $('#add_carModel').val();
-    vehicle.license_plate = $('#add_licensePlate').val();
-    vehicle.price_per_hour = $('#add_pricePerHour').val();
-
-    $.ajax({
-      url: "api/vehicles",
-      type: 'POST',
-      data: JSON.stringify(vehicle),
-      contentType: "application/json",
-      dataType: "json",
-      success: function(result){
-        
-        getVehicles();
-        console.log(result);
-        
-      }
-    });
-  }
-
-</script>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -156,22 +72,151 @@
 <div class="modal fade" id="addCarsModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Vehicles</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <input id="add_carBrand" type="text" />
-        <input id="add_carModel" type="text" />
-        <input id="add_licensePlate" type="text" />
-        <input id="add_pricePerHour" type="text" />
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary vehicle-save" onClick="addVehicle()">Save changes</button>
+      <form id="addVehiclesForm">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Vehicles</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          
+            <div class="form-group">
+              <label>Car brand</label>
+              <input name="car_brand" type="text" class="form-control required" placeholder="Enter car brand">
+            </div>
+            <div class="form-group">
+              <label>Car model</label>
+              <input name="car_model "type="text" class="form-control required"  placeholder="Enter car model">
+            </div>  
+            <div class="form-group">
+              <label>license plate</label>
+              <input name="licence_plate" type="text" class="form-control required"  placeholder="Enter licence plate">
+            </div> 
+            <div class="form-group">
+              <label>Price per hour</label>
+              <input name="price_per_hour" type="number" class="form-control required"  placeholder="Enter price per hour">
+            </div>      
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
       </div>
     </div>
   </div>
 </div>
+
+
+<script>
+  $("#addVehiclesForm").validate({
+  submitHandler: function(form) {
+    let vehicle = Object.fromEntries((new FormData(form)).entries());
+    $.ajax({
+        url: "api/vehicles",
+        type: 'POST',
+        data: JSON.stringify(vehicle),
+        contentType: "application/json",
+        dataType: "json",
+        success: function(result){
+          
+          getVehicles();
+          $("#addCarsModal").modal("hide");
+          console.log(result);
+          
+        }
+      });
+  }
+ });
+    // ajax get requests from API
+    getVehicles();
+  
+    function showModal(id){
+      $('.vehicle-details').attr('disabled', true);
+      $.get('api/vehicles/'+id, function(data){
+        console.log(data);
+        $("#id").val(data.id);
+        $("#carBrand").val(data.car_brand);
+        $("#carModel").val(data.car_model);
+        $("#licensePlate").val(data.license_plate);
+        $("#pricePerHour").val(data.price_per_hour);
+        $("#exampleModal").modal("show");
+        $('.vehicle-details').attr('disabled', false);
+      })
+    }
+  
+    function getVehicles(){
+        
+      $.get( "api/vehicles", function( data ) {
+  
+        $("#vehicle-list").html("");
+  
+        var html="";
+        for(let i = 0; i < data.length; i++){
+          html += `
+          <tr>
+            <th scope="row">${i+1}</th>
+            <td>`+ data[i].car_brand +`</td>
+            <td>`+ data[i].car_model +`</td>
+            <td>`+ data[i].license_plate +`</td>
+            <td>`+ data[i].price_per_hour +`</td>
+            <td><button type="button" class="btn btn-secondary vehicle-details" onClick="showModal(`+ data[i].id +`)">Show details</button></td> 
+          </tr>`;
+        }
+        $("#vehicle-list").html(html);
+        console.log(data);
+      });
+    }
+  
+    function saveVehicle(){
+      $('.save-vehicle').attr('disabled', true);
+      var vehicle = {};
+  
+      vehicle.id = $('#id').val()
+      vehicle.car_brand = $('#carBrand').val();
+      vehicle.car_model = $('#carModel').val();
+      vehicle.license_plate = $('#licensePlate').val();
+      vehicle.price_per_hour = $('#pricePerHour').val();
+  
+      $.ajax({
+        url: 'api/vehicles/'+$('#id').val(),
+        type: 'PUT',
+        data: JSON.stringify(vehicle),
+        contentType: "application/json",
+        dataType: "json",
+        success: function(result){
+          $("#exampleModal").modal("hide");
+          getVehicles();
+        }
+      });
+  
+      console.log(vehicle);
+    }
+  
+/*    function addVehicle(){
+      console.log("Save car");
+  
+      var vehicle = {};
+      vehicle.car_brand = $('#add_carBrand').val();
+      vehicle.car_model = $('#add_carModel').val();
+      vehicle.license_plate = $('#add_licensePlate').val();
+      vehicle.price_per_hour = $('#add_pricePerHour').val();
+  
+      $.ajax({
+        url: "api/vehicles",
+        type: 'POST',
+        data: JSON.stringify(vehicle),
+        contentType: "application/json",
+        dataType: "json",
+        success: function(result){
+          
+          getVehicles();
+          $("#addCarsModal").modal("hide");
+          console.log(result);
+          
+        }
+      });
+    } */
+  
+</script>
 
 </html>
