@@ -42,6 +42,7 @@
 <script src="js/jquery-3.6.0.min.js"></script>
 <script src="js/bootstrap.bundle.min.js"></script>
 <script src="js/jquery.validate.min.js"></script>
+<script src="js/vehicle-service.js"></script>
 
 
 
@@ -61,7 +62,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary vehicle-save" onClick="saveVehicle()">Save changes</button>
+          <button type="button" class="btn btn-primary vehicle-save" onClick="VehicleService.update()">Save changes</button>
         </div>
       </div>
     </div>
@@ -106,137 +107,7 @@
 
 
 <script>
-   $("#addVehicle").validate({
-  submitHandler: function(form) {
-    console.log($(form));
-
-    var vehicle = Object.fromEntries((new FormData(form)).entries()); 
-    $.ajax({
-        url: "api/vehicles",
-        type: 'POST',
-        data: JSON.stringify(vehicle),
-        contentType: "application/json",
-        dataType: "json",
-        success: function(result){
-          
-          getVehicles();
-          $("#addCarsModal").modal("hide");
-          console.log(result);
-          
-        }
-      });
-
-  }
- });
-
-
-    // ajax get requests from API
-   getVehicles();
-
-    function deleteVehicle(id){
-      $('.vehicle-details').attr('disabled', true);
-      $.ajax({
-        url: 'api/vehicles/'+id,
-        type: 'DELETE',
-        success: function(result){
-          getVehicles();
-          
-        }
-      });
-    }
-
-    function showModal(id){
-      $('.vehicle-details').attr('disabled', true);
-      $.get('api/vehicles/'+id, function(data){
-        console.log(data);
-        $("#id").val(data.id);
-        $("#carBrand").val(data.car_brand);
-        $("#carModel").val(data.car_model);
-        $("#licensePlate").val(data.license_plate);
-        $("#pricePerHour").val(data.price_per_hour);
-        $("#exampleModal").modal("show");
-        $('.vehicle-details').attr('disabled', false);
-      })
-    }
-  
-    function getVehicles(){
-        
-      $.get( "api/vehicles", function( data ) {
-  
-        $("#vehicle-list").html("");
-  
-        var html="";
-        for(let i = 0; i < data.length; i++){
-          html += `
-          <tr>
-            <th scope="row">${i+1}</th>
-            <td>`+ data[i].car_brand +`</td>
-            <td>`+ data[i].car_model +`</td>
-            <td>`+ data[i].license_plate +`</td>
-            <td>`+ data[i].price_per_hour +`</td>
-            <td>
-              <div class="btn-group mr-2" role="group">
-              <button type="button" class="btn btn-primary vehicle-details" onClick="showModal(`+ data[i].id +`)">Edit</button>
-              <button type="button" class="btn btn-danger vehicle-details" onClick="deleteVehicle(`+ data[i].id +`)">Delete</button>
-            </div</td>
-
-          </tr>`;
-        }
-        $("#vehicle-list").html(html);
-        console.log(data);
-      });
-    }
-  
-    function saveVehicle(){
-      $('.save-vehicle').attr('disabled', true);
-      var vehicle = {};
-  
-      vehicle.id = $('#id').val()
-      vehicle.car_brand = $('#carBrand').val();
-      vehicle.car_model = $('#carModel').val();
-      vehicle.license_plate = $('#licensePlate').val();
-      vehicle.price_per_hour = $('#pricePerHour').val();
-  
-      $.ajax({
-        url: 'api/vehicles/'+$('#id').val(),
-        type: 'PUT',
-        data: JSON.stringify(vehicle),
-        contentType: "application/json",
-        dataType: "json",
-        success: function(result){
-          $("#exampleModal").modal("hide");
-          getVehicles();
-        }
-      });
-  
-      console.log(vehicle);
-    }
-  
-   /* function addVehicle(){
-      console.log("Save car");
-  
-      var vehicle = {};
-      vehicle.car_brand = $('#add_carBrand').val();
-      vehicle.car_model = $('#add_carModel').val();
-      vehicle.license_plate = $('#add_licensePlate').val();
-      vehicle.price_per_hour = $('#add_pricePerHour').val();
-  
-      $.ajax({
-        url: "api/vehicles",
-        type: 'POST',
-        data: JSON.stringify(vehicle),
-        contentType: "application/json",
-        dataType: "json",
-        success: function(result){
-          
-          getVehicles();
-          $("#addCarsModal").modal("hide");
-          console.log(result);
-          
-        }
-      });
-    } */
-  
+  VehicleService.init();
 </script>
 
 </html>
