@@ -133,6 +133,18 @@
     // ajax get requests from API
    getVehicles();
 
+    function deleteVehicle(id){
+      $('.vehicle-details').attr('disabled', true);
+      $.ajax({
+        url: 'api/vehicles/'+id,
+        type: 'DELETE',
+        success: function(result){
+          getVehicles();
+          
+        }
+      });
+    }
+
     function showModal(id){
       $('.vehicle-details').attr('disabled', true);
       $.get('api/vehicles/'+id, function(data){
@@ -162,7 +174,12 @@
             <td>`+ data[i].car_model +`</td>
             <td>`+ data[i].license_plate +`</td>
             <td>`+ data[i].price_per_hour +`</td>
-            <td><button type="button" class="btn btn-secondary vehicle-details" onClick="showModal(`+ data[i].id +`)">Show details</button></td> 
+            <td>
+              <div class="btn-group mr-2" role="group">
+              <button type="button" class="btn btn-primary vehicle-details" onClick="showModal(`+ data[i].id +`)">Edit</button>
+              <button type="button" class="btn btn-danger vehicle-details" onClick="deleteVehicle(`+ data[i].id +`)">Delete</button>
+            </div</td>
+
           </tr>`;
         }
         $("#vehicle-list").html(html);
