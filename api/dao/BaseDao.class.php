@@ -1,8 +1,11 @@
 <?php
+ini_set("log_errors", 1);
+ini_set("error_log", "/tmp/php-error.log");
+error_log( "Hello, errors!" );
 
 class BaseDao{
 
-    public $conn;
+    private $conn;
 
     private $table_name;
     public function __construct($table_name){
@@ -14,6 +17,7 @@ class BaseDao{
     // $password = "eDdnDb7kTR&28Du";
     // $name="freedb_carsharing";
     $this->table_name = $table_name;
+
     $servername = "localhost";
     $username = "root";
     $password = "864950sa";
