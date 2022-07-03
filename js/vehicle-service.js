@@ -29,7 +29,7 @@
         <div class="btn-group mr-2" role="group">
         <button type="button" class="btn btn-primary vehicle-details" onClick="VehicleService.get(`+ data[i].id +`)">Edit</button>
         <button type="button" class="btn btn-danger vehicle-details" onClick="VehicleService.delete(`+ data[i].id +`)">Delete</button>
-      </div</td>
+      </div></td>
 
     </tr>`;
   }
