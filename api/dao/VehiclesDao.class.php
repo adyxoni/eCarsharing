@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__.'/BaseDao.calss.php';
+require_once __DIR__.'/BaseDao.class.php';
 
 class VehiclesDao extends BaseDao{
 
