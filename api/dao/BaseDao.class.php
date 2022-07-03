@@ -57,7 +57,7 @@ public function delete($id){
     }
 
 
-protected function insert($entity){
+public function add($entity){
     $query = "INSERT INTO ".$this->table_name." (";
     foreach ($entity as $column => $value) {
        $query .= $column.", ";
