@@ -10,25 +10,25 @@ Flight::route('/', function(){
     });
   
   Flight::route('GET /vehicles', function(){
-    Flight::json(Flight::VehicleService()->get_all());
+    Flight::json(Flight::vehicleService()->get_all());
   });
   
   Flight::route('GET /vehicles/@id', function($id){
-    Flight::json(Flight::VehicleService()->get_by_id($id));
+    Flight::json(Flight::vehicleService()->get_by_id($id));
   });
   
   Flight::route('POST /vehicles', function(){
-    Flight::json(Flight::VehicleService()->add(Flight::request()->data->getData()));
+    Flight::json(Flight::vehicleService()->add(Flight::request()->data->getData()));
   });
   
   Flight::route('DELETE /vehicles/@id', function($id){
-    Flight::VehicleService()->delete($id);
+    Flight::vehicleService()->delete($id);
     Flight::json(["message" => "deleted"]);
   });
   
   Flight::route('PUT /vehicles/@id', function($id){
     $data = Flight::request()->data->getData();
-    Flight::json(Flight::VehicleService()->update($id, $data));
+    Flight::json(Flight::vehicleService()->update($id, $data));
   });
 
 ?>
