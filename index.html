@@ -1,114 +1,167 @@
 <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
 
-<html lang="en" dir="ltr">
-<head>
-    <meta charset="UTF-8">
-    <title>ecarsharing</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+        <title>Carsharing</title>
 
-    
-    <style>
-      .error{
-        color: red;
-      }
-    </style>
-    <!-- Adding button-->
-    <div class="row">
-      <div>
-        <button class="btn btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#addCarsModal">Add Vehicle</button>
-      </div>
-    </div>
-</head>
+        <!-- DataTable CSS -->
+        <link href="./assets/css/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+        <link href="./assets/css/dataTables/dataTables.responsive.css" rel="stylesheet">
 
-<body>
-    <main>
-        <div>
-            <table class="table">
-                <thead class="thead-dark">
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Car Brand</th>
-                    <th scope="col">Car Model</th>
-                    <th scope="col">License Plate</th>
-                    <th scope="col">Price per Hour</th>
-                  </tr>
-                </thead>
-                <tbody id="vehicle-list">
-                </tbody>
-            </table> 
-        </div>
-    </main>
-</body>
+        <!-- Bootstrap Core CSS -->
+        <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
 
-<script src="js/jquery-3.6.0.min.js"></script>
-<script src="js/bootstrap.bundle.min.js"></script>
-<script src="js/jquery.validate.min.js"></script>
-<script src="js/vehicle-service.js"></script>
+        <!-- MetisMenu CSS -->
+        <link href="./assets/css/metisMenu.min.css" rel="stylesheet">
 
+        <!-- Timeline CSS -->
+        <link href="./assets/css/timeline.css" rel="stylesheet">
 
+        <!-- Custom CSS -->
+        <link href="./assets/css/startmin.css" rel="stylesheet">
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <input id="id" type="hidden" />
-          <input id="carBrand" type="text" />
-          <input id="carModel" type="text" />
-          <input id="licensePlate" type="text" />
-          <input id="pricePerHour" type="text" />
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary vehicle-save" onClick="VehicleService.update()">Save changes</button>
-        </div>
-      </div>
-    </div>
-</div>
+        <!-- Morris Charts CSS -->
+        <link href="./assets/css/morris.css" rel="stylesheet">
+
+        <!--  SPApp CSS -->
+        <link href="./assets/css/jQuerySPApp.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="./assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+        <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" type="text/css">
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+
+    <body style="display:none;">
+      <div id="wrapper">
+                  <!-- Navigation -->
+                  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                      <div class="navbar-header">
+                          <a class="navbar-brand" href="index.html">Carsharing</a>
+                      </div>
+                      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                          <span class="sr-only">Toggle navigation</span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                      </button>
+                      <ul class="nav navbar-right navbar-top-links">
 
 
-<!--Modal for adding cars-->
-<div class="modal fade" id="addCarsModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form id="addVehicle">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Add Vehicles</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">      
-            <div class="form-group">
-              <label>Car brand</label>
-              <input name="car_brand" type="text" class="form-control required" placeholder="Enter car brand">
-            </div>
-            <div class="form-group">
-              <label>Car model</label>
-              <input name="car_model" type="text" class="form-control required"  placeholder="Enter car model">
-            </div>  
-            <div class="form-group">
-              <label>license plate</label>
-              <input name="license_plate" type="text" class="form-control required"  placeholder="Enter licence plate">
-            </div> 
-            <div class="form-group">
-              <label>Price per hour</label>
-              <input name="price_per_hour" type="number" class="form-control required"  placeholder="Enter price per hour">
-            </div>      
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-      </form> 
-    </div>
-  </div>
-</div>
+                          <li class="dropdown">
+                              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                  <i class="fa fa-user fa-fw"></i> <b class="caret"></b>
+                              </a>
+                              <ul class="dropdown-menu dropdown-user">
+                                  <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                                  </li>
+                                  <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                                  </li>
+                                  <li class="divider"></li>
+                                  <li><a href="#" onclick="doLogout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                                  </li>
+                              </ul>
+                          </li>
+                      </ul>
+                      <!-- /.navbar-top-links -->
+                      <div class="navbar-default sidebar" role="navigation">
+                          <div class="sidebar-nav navbar-collapse">
+                              <ul class="nav" id="side-menu">
+                                  <li class="sidebar-search">
+                                      <div class="input-group custom-search-form">
+                                          <input type="text" class="form-control" placeholder="Search...">
+                                          <span class="input-group-btn">
+                                              <button class="btn btn-primary" type="button">
+                                                  <i class="fa fa-search"></i>
+                                              </button>
+                                      </span>
+                                      </div>
+                                      <!-- /input-group -->
+                                  </li>
+                                  <li>
+                                      <a href="#dashboard" class="active"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                                  </li>
+                                  <li>
+                                      <a href="#vehicles"><i class="fa fa-table fa-fw"></i> Vehicles</a>
+                                  </li>
+                                  <li>
+                                      <a href="#tables"><i class="fa fa-table fa-fw"></i> Tables</a>
+                                  </li>
+                                  <li>
+                                   <a href="#settings"><i class="fa fa-cog fa-fw"></i> Settings</a>
+                                  </li>
 
+                              </ul>
+                          </div>
+                      </div>
+                  </nav>
+                  <main id="jqueryspapp" role="main">
+             <section id="dashboard" data-load="dashboard.html"></section>
+             <section id="tables" data-load="tables.html"></section>
+             <section id="notifications" data-load="notifications.html"></section>
+             <section id="vehicles" data-load="vehicles.html"></section>
+             <section id="settings" data-load="settings.html"></section>
+           </main>
+       </div>
+       <!-- /#wrapper -->
 
-<script>
-  VehicleService.init();
-</script>
+        <!-- jQuery -->
+        <script src="./assets/js/jquery.min.js"></script>
 
+        <!-- Bootstrap Core JavaScript -->
+        <script src="./assets/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="./assets/js/metisMenu.min.js"></script>
+
+        <!-- SPApp JS -->
+        <script src="./assets/js/jQuerySPApp.js"></script>
+
+        <!-- Morris Charts JavaScript -
+        <script src="./assets/js/raphael.min.js"></script>
+        <script src="./assets/js/morris.min.js"></script>
+        <script src="./assets/js/morris-data.js"></script> -->
+
+        <!-- Custom Theme JavaScript -->
+        <script src="./assets/js/startmin.js"></script>
+
+        <!-- Toastr JS -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <script src="./assets/js/utils.js"></script>
+
+        <script src="//cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+
+        <script src="./assets/js/dataTables/jquery.dataTables.min.js"></script>
+        <script src="./assets/js/dataTables/dataTables.bootstrap.min.js"></script>
+        <script src="//cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script>
+
+        <script type="text/javascript">
+          $(document).ready(function() {
+            var app = $.jQuerySPApp({defaultView  : "dashboard"}); // initialize
+            app.run();
+
+            if (!window.localStorage.getItem("token")){
+             window.location = "login.html";
+           }else{
+             $('body').show();
+           }
+          });
+
+          function doLogout(){
+           window.localStorage.clear();
+           window.location = "login.html";
+         }
+        </script>
+    </body>
 </html>

@@ -3,7 +3,7 @@
 require_once __DIR__.'/BaseService.class.php';
 require_once __DIR__.'/../dao/VehiclesDao.class.php';
 
-class VehiclesService extends BaseService{
+class VehicleService extends BaseService{
 
     private $dao;
 
