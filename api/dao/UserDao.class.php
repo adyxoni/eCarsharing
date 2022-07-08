@@ -5,7 +5,7 @@ class VehiclesDao extends BaseDao{
 
 
   public function __construct(){
-    parent::__construct("vehicles");
+    parent::__construct("users");
   }
 
   public function get_user_by_email($email)  {
