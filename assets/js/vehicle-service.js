@@ -1,10 +1,9 @@
-
-  var VehicleService = {
+var VehicleService = {
 
     init: function(){
       $("#addVehicle").validate({
         submitHandler: function(form) {
-          var vehicle = Object.fromEntries((new FormData(form)).entries()); 
+          var vehicle = Object.fromEntries((new FormData(form)).entries());
           VehicleService.add(vehicle);
           }
        });
@@ -13,7 +12,7 @@
 
     list: function(){
       $.get( "api/vehicles", function( data ) {
-  
+
   $("#vehicle-list").html("");
 
   var html="";
@@ -30,7 +29,6 @@
         <button type="button" class="btn btn-primary vehicle-details" onClick="VehicleService.get(`+ data[i].id +`)">Edit</button>
         <button type="button" class="btn btn-danger vehicle-details" onClick="VehicleService.delete(`+ data[i].id +`)">Delete</button>
       </div></td>
-
     </tr>`;
   }
   $("#vehicle-list").html(html);
@@ -39,7 +37,7 @@
 
 
     },
-   
+
     get: function(id){
       $('.vehicle-details').attr('disabled', true);
       $.get('api/vehicles/'+id, function(data){
@@ -53,7 +51,7 @@
       })
 
     },
-    
+
     add: function(vehicle){
       $.ajax({
         url: "api/vehicles",
@@ -62,24 +60,24 @@
         contentType: "application/json",
         dataType: "json",
         success: function(result){
-          
+
           VehicleService.list();
           $("#addCarsModal").modal("hide");
-          
+
         }
       });
     },
-    
+
     update: function(){
       $('.save-vehicle').attr('disabled', true);
       var vehicle = {};
-  
+
       vehicle.id = $('#id').val()
       vehicle.car_brand = $('#carBrand').val();
       vehicle.car_model = $('#carModel').val();
       vehicle.license_plate = $('#licensePlate').val();
       vehicle.price_per_hour = $('#pricePerHour').val();
-  
+
       $.ajax({
         url: 'api/vehicles/'+$('#id').val(),
         type: 'PUT',
@@ -93,7 +91,7 @@
       });
 
     },
-    
+
     delete: function(id){
       $('.vehicle-details').attr('disabled', true);
       $.ajax({
@@ -101,9 +99,9 @@
         type: 'DELETE',
         success: function(result){
           VehicleService.list();
-          
+
         }
       });
     },
-  
+
   }
