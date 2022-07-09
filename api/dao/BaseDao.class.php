@@ -20,7 +20,7 @@ class BaseDao{
 
     $servername = "localhost";
     $username = "root";
-    $password = "root123";
+    $password = "864950sa";
     $name="freedb_carsharing";
   
     try {

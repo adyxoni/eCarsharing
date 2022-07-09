@@ -12,12 +12,7 @@
         color: red;
       }
     </style>
-    <!-- Adding button-->
-    <div class="row">
-      <div>
-        <button class="btn btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#addCarsModal">Add Vehicle</button>
-      </div>
-    </div>
+
 </head>
 
 <body>
@@ -45,14 +40,21 @@
 <script src="./assets/js/jquery.validate.min.js"></script>
 <script src="./assets/js/vehicle-service.js"></script>
 
+    <!-- Adding button-->
+    <div class="row">
+      <div>
+        <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#addCarsModal">Add Vehicle</button>
+      </div>
+    </div>
 
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+
+<div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false"  >
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <input id="id" type="hidden" />
@@ -71,13 +73,12 @@
 
 
 <!--Modal for adding cars-->
-<div class="modal fade" id="addCarsModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="addCarsModal" tabindex="-1" aria-hidden="true" >
   <div class="modal-dialog">
     <div class="modal-content">
       <form id="addVehicle">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Add Vehicles</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
             <div class="form-group">
@@ -98,13 +99,15 @@
             </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-primary">Submit</button>
         </div>
       </form>
     </div>
   </div>
 </div>
+
+
 
 
 <script>
