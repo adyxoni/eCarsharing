@@ -5,7 +5,7 @@ class VehiclesDao extends BaseDao{
 
 
   public function __construct(){
-    parent::__construct("vehicles");
+    parent::__construct("accounts");
   }
 
   public function get_accounts($search, $offset, $limit, $order="-id"){
