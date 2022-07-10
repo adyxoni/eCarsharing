@@ -9,20 +9,20 @@ class BaseDao{
 
     private $table_name;
     public function __construct($table_name){
-  
+
       // https://freedb.tech/dashboard/
-      
+
     // $servername = "sql.freedb.tech";
     // $username = "freedb_carsharing";
     // $password = "eDdnDb7kTR&28Du";
     // $name="freedb_carsharing";
     $this->table_name = $table_name;
 
-    $servername = "localhost";
-    $username = "root";
-    $password = "864950sa";
-    $name="freedb_carsharing";
-  
+    $servername = Config::DB_HOST();
+    $username = Config::DB_USERNAME();
+    $password = Config::DB_PASSWORD();
+    $name=Config::DB_SCHEME();
+
     try {
       $this->conn = new PDO("mysql:host=$servername;dbname=$name", $username, $password);
       // set the PDO error mode to exception
@@ -40,7 +40,7 @@ public function get_all(){
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-  
+
   /*
   * List individual records
   */
@@ -73,7 +73,7 @@ public function add($entity){
     }
     $query = substr($query, 0, -2);
     $query .= ")";
-    
+
     $stmt= $this->conn->prepare($query);
     $stmt->execute($entity); // sql injection prevention
     $entity['id'] = $this->conn->lastInsertId();
@@ -87,7 +87,7 @@ public function update($id, $entity, $id_column = "id"){
     }
     $query = substr($query, 0, -2);
     $query .= " WHERE ${id_column} = :id";
-    
+
     $stmt= $this->conn->prepare($query);
     $entity['id'] = $id;
     $stmt->execute($entity);
@@ -98,18 +98,11 @@ protected function query($query, $params){
     $stmt->execute($params);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+
 protected function query_unique($query, $params){
     $results = $this->query($query, $params);
     return reset($results);
     }
 
-
-
-
-
-
 }
-
-
 ?>

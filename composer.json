@@ -3,7 +3,8 @@
     "description": "eCarsharing application",
     "license": "apache2",
     "require": {
-        "mikecao/flight": "^2.0"
+        "mikecao/flight": "^2.0",
+        "firebase/php-jwt": "^6.2"
     },
 
     "post-install-cmd": [
