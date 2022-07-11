@@ -1,5 +1,7 @@
 <?php
 
+  require_once __DIR__.'/../config.php';
+
   Flight::route('GET /vehicles', function(){
     Flight::json(Flight::vehicleService()->get_all());
   });

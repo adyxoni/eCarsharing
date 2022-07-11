@@ -10,12 +10,6 @@ class BaseDao{
     private $table_name;
     public function __construct($table_name){
 
-      // https://freedb.tech/dashboard/
-
-    // $servername = "sql.freedb.tech";
-    // $username = "freedb_carsharing";
-    // $password = "eDdnDb7kTR&28Du";
-    // $name="freedb_carsharing";
     $this->table_name = $table_name;
 
     $servername = Config::DB_HOST();
