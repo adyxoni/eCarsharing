@@ -24,22 +24,28 @@ error_reporting(E_ALL);
 //   $headers = getallheaders();
 //   return @$headers[$name];
 // });
+
 // /* utility function for generating JWT token */
 // Flight::map('jwt', function($user){
 //   $jwt = \Firebase\JWT\JWT::encode(["exp" => (time() + Config::JWT_TOKEN_TIME), "id" => $user["id"], "aid" => $user["accountID"], "r" => $user["role"]], Config::JWT_SECRET);
 //   return ["token" => $jwt];
 // });
 
-
 require_once __DIR__.'/../vendor/autoload.php';
 require_once __DIR__.'/services/VehicleService.class.php';
+require_once __DIR__.'/services/CommentService.class.php';
+require_once __DIR__.'/services/TaskService.class.php';
 
 Flight::register('vehicleService', 'VehicleService');
 Flight::register('accountService', 'AccountService');
 Flight::register('userService', 'UserService');
+Flight::register('commentService', 'CommentService');
+Flight::register('taskService', 'TaskService');
 
 require_once __DIR__.'/routes/VehiclesRoutes.php';
 require_once __DIR__.'/routes/UserRoutes.php';
+require_once __DIR__.'/routes/CommentsRoutes.php';
+require_once __DIR__.'/routes/TasksRoutes.php';
 
 Flight::start();
 ?>

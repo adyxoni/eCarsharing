@@ -24,11 +24,13 @@ var VehicleService = {
       <td>`+ data[i].car_model +`</td>
       <td>`+ data[i].license_plate +`</td>
       <td>`+ data[i].price_per_hour +`</td>
+      <td>`+ data[i].id +`</td>
       <td>
         <div class="btn-group mr-2" role="group">
         <button type="button" class="btn btn-primary vehicle-details" onClick="VehicleService.get(`+ data[i].id +`)">Edit</button>
         <button type="button" class="btn btn-danger vehicle-details" onClick="VehicleService.delete(`+ data[i].id +`)">Delete</button>
-      </div></td>
+        </div>
+      </td>
     </tr>`;
   }
   $("#vehicle-list").html(html);
