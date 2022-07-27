@@ -11,7 +11,7 @@ Flight::route('GET /comments/@id', function($id){
 });
 
 Flight::route('POST /comments', function(){
-  Flight::json(Flight::vehicleService()->add(Flight::request()->data->getData()));
+  Flight::json(Flight::commentService()->add(Flight::request()->data->getData()));
 });
 
 Flight::route('DELETE /comments/@id', function($id){

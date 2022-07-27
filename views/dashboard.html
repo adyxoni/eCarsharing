@@ -1,3 +1,5 @@
+<script src="./assets/js/payment-service.js"></script>
+
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row">
@@ -111,6 +113,7 @@
                         <i class="fa fa-bar-chart-o fa-fw"></i> Revenue
                         
                     </div>
+                
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <div class="row">
@@ -122,58 +125,12 @@
                                             <th>#</th>
                                             <th>Date</th>
                                             <th>Time</th>
-                                            <th>Amount</th>
+                                            <th>Amount (BAM)</th>
+                                            <th>ID</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>3326</td>
-                                            <td>10/21/2013</td>
-                                            <td>3:29 PM</td>
-                                            <td>$321.33</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3325</td>
-                                            <td>10/21/2013</td>
-                                            <td>3:20 PM</td>
-                                            <td>$234.34</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3324</td>
-                                            <td>10/21/2013</td>
-                                            <td>3:03 PM</td>
-                                            <td>$724.17</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3323</td>
-                                            <td>10/21/2013</td>
-                                            <td>3:00 PM</td>
-                                            <td>$23.71</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3322</td>
-                                            <td>10/21/2013</td>
-                                            <td>2:49 PM</td>
-                                            <td>$8345.23</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3321</td>
-                                            <td>10/21/2013</td>
-                                            <td>2:23 PM</td>
-                                            <td>$245.12</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3320</td>
-                                            <td>10/21/2013</td>
-                                            <td>2:15 PM</td>
-                                            <td>$5663.54</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3319</td>
-                                            <td>10/21/2013</td>
-                                            <td>2:13 PM</td>
-                                            <td>$943.45</td>
-                                        </tr>
+                                        <tbody id="payment-list">
+                                        
                                         </tbody>
                                     </table>
                                 </div>
@@ -548,3 +505,38 @@
     <!-- /.container-fluid -->
 </div>
 <!-- /#page-wrapper -->
+
+<!-- MODALS -->
+<div class="modal fade" id="addPaymentsModal" tabindex="-1" aria-hidden="true" >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form id="addPayment">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Payment</h5>
+          </div>
+          <div class="modal-body">
+              <div class="form-group">
+                <label>Date</label>
+                <input name="date" type="date" class="form-control required">
+              </div>
+              <div class="form-group">
+                <label>Time</label>
+                <input name="time" type="time" class="form-control required">
+              </div>
+              <div class="form-group">
+                <label>Amount</label>
+                <input name="amount" type="text" class="form-control required"  placeholder="Enter amount in KM">
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+<script>
+    PaymentService.init();
+</script>
