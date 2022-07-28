@@ -8,6 +8,7 @@ var VehicleService = {
           }
        });
       VehicleService.list();
+      VehicleService.count();
       },
 
     list: function(){
@@ -33,7 +34,7 @@ var VehicleService = {
   }
   $("#vehicle-list").html(html);
 
-});
+  });
 
 
     },
@@ -102,4 +103,15 @@ var VehicleService = {
       });
     },
 
-  }
+    count: function(){
+      $.get("api/vehicles", function( data ){
+
+          $("#total-vehicles").html("");
+          var vehCounter = 0;
+
+          for(let i = 0; i < data.length; i++) vehCounter++;
+          $("#total-vehicles").html(vehCounter);
+      });
+    },
+
+}

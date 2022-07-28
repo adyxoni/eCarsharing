@@ -8,6 +8,7 @@ var TodoService = {
           }
        });
       TodoService.list();
+      TodoService.count();
       },
 
     list: function(){
@@ -155,6 +156,17 @@ var TodoService = {
           TodoService.list();
 
         }
+      });
+    },
+
+    count: function(){
+      $.get("api/todos", function( data ){
+
+          $("#total-tasks").html("");
+          var counter = 0;
+
+          for(let i = 0; i < data.length; i++) counter++;
+          $("#total-tasks").html(counter);
       });
     },
 

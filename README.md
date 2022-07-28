@@ -1,2 +1,2 @@
-# Heroku application: https://e-carsharing.herokuapp.com/
+# Administrative page for a company
 #
