@@ -19,7 +19,7 @@ var CommentService = {
             var html = "";
             var timeSince = "";
 
-            for(let i = 0; i < data.length; i++){
+            for(let i = data.length - 1; i >= 0; i--){
 
                 timeSince = CommentService.timeSince(data[i].posted)
                 
@@ -73,6 +73,7 @@ var CommentService = {
         dataType: "json",
         success: function(result){
           CommentService.list();
+          CommentService.count();
         }
       });
     },
