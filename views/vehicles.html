@@ -81,40 +81,40 @@
 
 
 <!--Modal for adding cars-->
-<div class="modal fade" id="addCarsModal" tabindex="-1" aria-hidden="true" >
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form id="addVehicle">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Add Vehicles</h5>
+    <div class="modal fade" id="addCarsModal" tabindex="-1" aria-hidden="true" >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form id="addVehicle">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add Vehicles</h5>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                  <label>Car brand</label>
+                  <input name="car_brand" type="text" class="form-control required" placeholder="Enter car brand">
+                </div>
+                <div class="form-group">
+                  <label>Car model</label>
+                  <input name="car_model" type="text" class="form-control required"  placeholder="Enter car model">
+                </div>
+                <div class="form-group">
+                  <label>License plate</label>
+                  <input name="license_plate" type="text" class="form-control required"  placeholder="Enter license plate">
+                </div>
+                <div class="form-group">
+                  <label>Price per hour</label>
+                  <input name="price_per_hour" type="number" class="form-control required"  placeholder="Enter price per hour">
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
         </div>
-        <div class="modal-body">
-            <div class="form-group">
-              <label>Car brand</label>
-              <input name="car_brand" type="text" class="form-control required" placeholder="Enter car brand">
-            </div>
-            <div class="form-group">
-              <label>Car model</label>
-              <input name="car_model" type="text" class="form-control required"  placeholder="Enter car model">
-            </div>
-            <div class="form-group">
-              <label>License plate</label>
-              <input name="license_plate" type="text" class="form-control required"  placeholder="Enter license plate">
-            </div>
-            <div class="form-group">
-              <label>Price per hour</label>
-              <input name="price_per_hour" type="number" class="form-control required"  placeholder="Enter price per hour">
-            </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-      </form>
+      </div>
     </div>
   </div>
-</div>
-</div>
 </div>
 
 

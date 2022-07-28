@@ -36,6 +36,7 @@ require_once __DIR__.'/services/VehicleService.class.php';
 require_once __DIR__.'/services/CommentService.class.php';
 require_once __DIR__.'/services/TaskService.class.php';
 require_once __DIR__.'/services/PaymentService.class.php';
+require_once __DIR__.'/services/TodoService.class.php';
 
 Flight::register('vehicleService', 'VehicleService');
 Flight::register('accountService', 'AccountService');
@@ -43,12 +44,14 @@ Flight::register('userService', 'UserService');
 Flight::register('commentService', 'CommentService');
 Flight::register('taskService', 'TaskService');
 Flight::register('paymentService', 'PaymentService');
+Flight::register('todoService', 'TodoService');
 
 require_once __DIR__.'/routes/VehiclesRoutes.php';
 require_once __DIR__.'/routes/UserRoutes.php';
 require_once __DIR__.'/routes/CommentsRoutes.php';
 require_once __DIR__.'/routes/TasksRoutes.php';
 require_once __DIR__.'/routes/PaymentsRoutes.php';
+require_once __DIR__.'/routes/TodosRoutes.php';
 
 Flight::start();
 ?>

@@ -8,6 +8,7 @@ var PaymentService = {
             }
         });
         PaymentService.list();
+        PaymentService.count();
     },
 
     list: function(){
@@ -23,13 +24,11 @@ var PaymentService = {
                 else{
                     html += `
                     <tr>
-                    <th scope="row">${j+1}</th>
                     <td>`+ data[i].date +`</td>
                     <td>`+ data[i].time +`</td>
                     <td>`+ data[i].amount +`</td>
                     <td>`+ data[i].id +`</td>
                     </tr>`;
-                    j++;
                 }
             }
             $("#payment-list").html(html);
@@ -43,8 +42,9 @@ var PaymentService = {
             $("#date").val(data.date);
             $("#time").val(data.time);
             $("#amount").val(data.amount);
-        })
-  
+            $("#paymentModal").modal("show");
+            $(".payment-details").attr('disabled', false);
+        });
     },
 
     add: function(payment){
@@ -84,7 +84,7 @@ var PaymentService = {
   
       },
 
-      delete: function(id){
+    delete: function(id){
         $('.payment-details').attr('disabled', true);
         $.ajax({
           url: 'api/payments/'+id,
@@ -94,5 +94,17 @@ var PaymentService = {
   
           }
         });
-      }
+    },
+
+    count: function(){
+        $.get("api/payments", function( data ){
+
+            $("#total-payments").html("");
+            var counter = 0;
+
+            for(let i = 0; i < data.length; i++) counter++;
+            $("#total-payments").html(counter);
+        });
+    },
+
 }

@@ -26,10 +26,8 @@ var VehicleService = {
       <td>`+ data[i].price_per_hour +`</td>
       <td>`+ data[i].id +`</td>
       <td>
-        <div class="btn-group mr-2" role="group">
-        <button type="button" class="btn btn-primary vehicle-details" onClick="VehicleService.get(`+ data[i].id +`)">Edit</button>
-        <button type="button" class="btn btn-danger vehicle-details" onClick="VehicleService.delete(`+ data[i].id +`)">Delete</button>
-        </div>
+        <i class="fa fa-pencil payment-details" style="margin: 5px" onClick="VehicleService.get(`+ data[i].id +`)"></i>
+        <i class="fa fa-trash payment-details" style="margin: 5px" onClick="VehicleService.delete(`+ data[i].id +`)"></i>
       </td>
     </tr>`;
   }
@@ -62,10 +60,8 @@ var VehicleService = {
         contentType: "application/json",
         dataType: "json",
         success: function(result){
-
-          VehicleService.list();
           $("#addCarsModal").modal("hide");
-
+          VehicleService.list();
         }
       });
     },
